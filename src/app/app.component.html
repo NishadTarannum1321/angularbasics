@@ -1,0 +1,42 @@
+<!--<h3>welcome to angular classes</h3>
+{{title}}
+<label>Details:</label><input type="text"(input)='updateInputVal($event.target.value)'>
+<div [style.color] = color>
+    <p [style.width] = widthVal>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit architecto hic ipsum. Qui itaque repudiandae mollitia error adipisci ipsa excepturi quam et corrupti minus, nobis quidem! Voluptatem temporibus blanditiis fugit?</p>
+</div>
+<div>
+    <label>Details</label> <input type="text" (keyup.enter)='updateInputVal($event.target.value)' (blur)='blurfn($event.target.value)'>{{data}}
+<div>{{blurdata}}</div>
+</div>
+<div>
+<input type="text" [(ngModel)]= 'ngData' >
+<h3>{{ngData}}</h3>
+</div>
+<app-template-driven-form></app-template-driven-form>
+   <div *ngIf='3<4'>
+    <p>content</p>
+   </div>
+   <ul>
+       <li *ngFor='let item of sampleData'>
+           {{item}}
+       </li>
+   </ul>
+   <div [ngClass]="{testcase:1>2?true:false,secondcase:true}">
+       
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum mollitia, ipsam, architecto animi nihil officia eligendi esse nesciunt culpa consectetur cumque maxime nemo harum dolor </p>
+   </div>
+   <div>
+   <label for="">Username</label>
+   <input type="text" #userContent (keyup)='testClick(userContent.value)'>
+   <p>{{userContent.value}}</p>
+   </div>-->
+  <!-- <app-template-driven-form></app-template-driven-form>-->
+   <!--<app-reactiveform></app-reactiveform>-->
+    <app-navbar (sendDetails)="receiveDataFromNavbar($event)"></app-navbar>
+    <div *ngIf="showCustomer">
+   <app-customers [sampleNumbers]='sampleData'></app-customers>
+   </div>
+   <div *ngIf="showOrders">
+       <app-orders></app-orders>
+       </div>
+       <router-outlet></router-outlet>

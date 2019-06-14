@@ -1,0 +1,220 @@
+<p>
+  reactiveform works!
+</p>
+
+<!--<div class="container">
+  <form [formGroup] =  "customerInfo" (ngSubmit)= 'sendData()'>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        formControlName = "userName1"
+        required
+        email
+        [ngClass] = "{'is-invalid':customerInfo.controls.userName1.touched && customerInfo.controls.userName1.invalid}"
+        id="exampleInputEmail1" 
+        aria-describedby="emailHelp" 
+        placeholder="Enter email">
+        
+        <div class = "invalid-feedback"> 
+          <label *ngIf = 'customerInfo.controls.userName1.errors?.required'> Username is mandatory. </label>
+        
+          <label *ngIf = 'customerInfo.controls.userName1.errors?.email'> Enter a valid email address</label>
+        </div>
+
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">password</label>
+      <input 
+        type="password" 
+        class="form-control"
+        required
+        minlength="6"
+        formControlName = "password" 
+        [ngClass] = "{'is-invalid':customerInfo.controls.password.invalid && (customerInfo.controls.password.touched || customerInfo.controls.password.dirty)}"
+        id="exampleInputPassword1"
+        placeholder="Password">
+        
+        <div class = "invalid-feedback"> 
+          <label *ngIf = 'customerInfo.controls.password.errors?.required'> Enter a password </label>
+        
+          <label *ngIf = 'customerInfo.controls.password.errors?.minlength'> Passord must be more than 6 characters</label>
+        </div>
+    </div>-->
+    <div class="container">
+      <form [formGroup] =  "customerInfo" (ngSubmit)= 'sendData()'>
+        <div class="form-group">
+          <label for="exampleInputPassword1">FirstName</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName = "firstName" 
+            [ngClass] = "{'is-invalid':customerInfo.controls.firstName.invalid 
+                          && (customerInfo.controls.firstName.touched 
+                          || customerInfo.controls.firstName.dirty)}"
+            id="firstname"
+            placeholder="First Name">
+            
+            <div class = "invalid-feedback"> 
+              <label *ngIf = 'customerInfo.controls.firstName.errors?.required'> Enter firstname </label>
+            
+              <label *ngIf = 'customerInfo.controls.firstName.errors?.minlength'> Passord must be more than 6 characters</label>
+            </div>
+        </div>
+       <!-- lastname -->
+        <div class="form-group">
+            <label for="exampleInputPassword1">LastName</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName = "lastName" 
+              [ngClass] = "{'is-invalid':customerInfo.controls.lastName.invalid 
+                            && (customerInfo.controls.lastName.touched 
+                            || customerInfo.controls.lastName.dirty)}"
+              id="lastname"
+              placeholder="Last Name">
+              
+              <div class = "invalid-feedback"> 
+                <label *ngIf = 'customerInfo.controls.lastName.errors?.required'> Enter lastname</label>
+          
+              </div>
+        </div>
+        <!-----optional validation-->
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            formControlName = "notification" 
+            (click) = "setNotification('email')"
+            id="exampleRadios1" 
+            value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Email
+          </label>
+        </div>
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            formControlName = "notification" 
+            (click) = "setNotification('phone')" 
+            id="exampleRadios2" 
+            value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            Phone
+          </label>
+        </div> 
+    
+         <!-- email -->
+
+         <div formGroupName = "emailGroup">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              formControlName = "emailControl"
+              
+              [ngClass] = "{'is-invalid':customerInfo.controls.emailGroup.controls.emailControl.touched 
+                          && customerInfo.controls.emailGroup.controls.emailControl.invalid}"
+              id="exampleInputEmail1" 
+              aria-describedby="emailHelp" 
+              placeholder="Enter email">
+              
+              <div class = "invalid-feedback"> 
+                <label *ngIf = 'customerInfo.controls.emailGroup.controls.emailControl.errors?.required'> Username is mandatory. </label>
+                <label *ngIf = 'customerInfo.controls.emailGroup.controls.emailControl.errors?.email'> Enter a valid email address</label>
+              </div>
+      
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Confirm Email address</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              formControlName = "confirmEmailControl"
+              
+              [ngClass] = "{'is-invalid':customerInfo.controls.emailGroup.controls.confirmEmailControl.touched 
+                          && customerInfo.controls.emailGroup.controls.confirmEmailControl.invalid}"
+              id="exampleInputEmail1" 
+              aria-describedby="emailHelp" 
+              placeholder="Enter email">
+              
+              <div class = "invalid-feedback"> 
+                <label *ngIf = 'customerInfo.controls.emailGroup.controls.emailControl.errors?.required'> Username is mandatory. </label>
+                <label *ngIf = 'customerInfo.controls.emailGroup.controls.emailControl.errors?.email'> Enter a valid email address</label>
+              </div>
+      
+          </div>
+          
+
+          <div *ngIf = "customerInfo.get('emailGroup').invalid && customerInfo.get('emailGroup').touched">
+            <label> email address does not match</label>
+          </div>
+          </div>
+     <!--checkbox-->
+     <div class="form-group form-check">
+      <input type="checkbox"
+      formControlName="checkIn"
+      class="form-check-input" 
+      id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    {{customerInfo.controls.checkIn.value}}
+    <div *ngIf = "customerInfo.controls.checkIn.value">
+      <!--PHONE LENGTH VALIDATION-->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="phone" class="form-control" formControlName = 'phoneControl'
+        [ngClass]="{'is-invalid': customerInfo.get('phoneControl').invalid&&customerInfo.get('phoneControl').touched}"
+         id="phone" placeholder="Enter phone">
+      
+        <label *ngIf = "customerInfo.get('phoneControl').invalid">phone number must be a 10 digit number</label>
+         <!-- <div class="form-control-feedback" *ngIf="customerInfo.controls.phoneControl.errors && (customerInfo.controls.phoneControl.dirty || customerInfo.controls.phoneControl.touched)">
+        
+          <label *ngIf="customerInfo.get('phoneControl').invalid || customerInfo.controls.phoneControl.errors.pattern ">phone number should be 10 digits</label>
+        </div>-->
+      </div>
+      <!-- custom validation -->
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input type="number"  class="form-control" 
+        formControlName="rating"
+        [ngClass] = "{'is-invalid':customerInfo.get('rating').invalid&&customerInfo.get('rating').touched}"
+        id="rating" placeholder="ratings">
+       <!-- <div class="invalid-feedback" *ngIf="customerInfo.controls.rating.errors && (customerInfo.controls.rating.dirty || customerInfo.controls.rating.touched)" >
+          <label *ngIf = "customerInfo.get('rating').invalid || customerInfo.controls.rating.errors.pattern">rating must be inbetween 1 to 5 </label>
+        </div>
+        <div class="invalid-feedback" >
+          
+          <label *ngIf ="customerInfo.get('rating').errors.min||customerInfo.get('rating').errors.max" > number should be in between 1 to 5</label>
+          <label *ngIf="customerInfo.get('rating').invalid || customerInfo.controls.rating.errors.pattern "> number should be 10 digits</label>
+        </div>-->
+        <div class="invalid-feedback">
+          {{customerInfo.controls.rating.invalid}}
+        <label *ngIf = 'customerInfo.controls.rating.invalid'>
+          
+          give rating between 0 - 10 , 0 being poor - 10 being best
+        </label>
+      </div>
+      </div>
+      <h3>Address</h3>
+      <div class="form-group">
+        <label for="hno">HNO</label>
+        <input type="text" class="form-control" id="hno" placeholder="House number">
+      </div>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" id="street" placeholder="street name">
+      </div>
+      <div class="form-group">
+        <label for="City">City</label>
+        <input type="text" class="form-control" id="city" placeholder="Enter City">
+      </div>
+    </div>
+    <!--submit button-->
+    <button type="submit" class="btn btn-primary"[title]= 'customerInfo.valid ? "click to submit":"Please update the required fields"' [disabled] = '!customerInfo.valid' >Submit</button>
+    
+  </form>
+</div>

@@ -1,0 +1,128 @@
+<!--<p>
+  template-driven-form works!
+</p>-->
+
+<!--<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>-->
+
+<div class="container">
+  <form #loginForm =  "ngForm" (ngSubmit)= 'sendData(loginForm)'>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        name="emailControl"
+        ngModel
+        #emailVar = "ngModel"
+        required
+        email
+        [ngClass] = "{'is-invalid':emailVar.touched && emailVar.invalid}"
+        id="exampleInputEmail1" 
+        aria-describedby="emailHelp" 
+        placeholder="Enter email">
+        
+        <div class = "invalid-feedback"> 
+          <label *ngIf = 'emailVar.errors?.required'> Username is mandatory. </label>
+        
+          <label *ngIf = 'loginForm.controls.emailControl.errors?.email'> Enter a valid email address</label>
+        </div>
+
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input 
+        type="password" 
+        class="form-control" 
+        ngModel
+        required
+        minlength="6"
+        name="passwordControl"
+        #pwdVar = "ngModel"
+        [ngClass] = "{'is-invalid':pwdVar.invalid && (pwdVar.touched || pwdVar.dirty)}"
+        id="exampleInputPassword1"
+        placeholder="Password">
+        
+        <div class = "invalid-feedback"> 
+          <label *ngIf = 'pwdVar.errors?.required'> Enter a password </label>
+        
+          <label *ngIf = 'loginForm.controls.passwordControl.errors?.minlength'> Passord must be more than 6 characters</label>
+        </div>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" 
+      ngModel
+      name="checkBoxControl"
+      class="form-check-input" 
+      id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    {{loginForm.controls.checkBoxControl.value}}
+    <div *ngIf = "loginForm.controls.checkBoxControl.value">
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="phone" class="form-control"
+        number
+        ngModel
+        length="10"
+        required
+        name="phoneControl"
+        #phonevar="ngModel"
+        [ngClass] = "{'is-invalid':phonevar.invalid&&(phonevar.touched||phonevar.dirty) }"
+        id="phone" 
+        placeholder="Enter phone">
+       
+        <div class = "invalid-feedback"> 
+          <label *ngIf = 'phonevar.errors?.number'> Enter phonenumber </label>
+        
+          <label *ngIf = 'loginForm.controls.phoneControl.errors?.length'> number must be valid</label>
+        </div>
+      
+        
+      </div>
+     
+      <h3>Address</h3>
+      <div class="form-group">
+        <label for="hno">HNO</label>
+        <input type="text"
+         class="form-control" id="hno" placeholder="House number">
+      </div>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" id="street" placeholder="street name">
+      </div>
+      <div class="form-group">
+        <label for="City">City</label>
+        <input type="text" class="form-control" id="city" placeholder="Enter City">
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary"[title]= 'loginForm.valid ? "click to submit":"Please update the required fields"' [disabled] = '!loginForm.control.valid' >Submit</button>
+    
+    <!--{{loginForm.controls.valid}}
+    <p>valid : {{emailVar.valid}}{{loginForm.controls.emailControl.valid}}</p>  
+    <p>invalid : {{emailVar.invalid}}</p>
+    <p>touched : {{emailVar.touched}}</p>
+    <p>untouched : {{emailVar.untouched}}</p>
+    <p>pristine : {{emailVar.pristine}}</p>
+    <p>dirty : {{emailVar.dirty}}</p>-->
+  </form>
+</div>
+
+    
+        
+  
